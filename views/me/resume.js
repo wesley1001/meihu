@@ -3,30 +3,55 @@
  */
 'use strict';
 
-import React,{
+import React, {
     Component,
     StyleSheet,
     View,
+    ScrollView,
     Image,
     Text,
+    TextInput,
     TouchableOpacity,
+    TouchableHighlight,
 } from 'react-native';
-
+import Util from '../util.js'
 export default class Resume extends Component {
     constructor(props) {
         super(props);
-        this.state = {title: null};
+        this.state = {
+            title: null,
+            showIndex: {
+                height: 0,
+                opacity: 0
+            },
+            showLogin: {
+                flex: 1,
+                opacity: 1
+            },
+        };
+        
     }
-
+    _login(){
+        
+    }
+    _reg(){
+        
+    }
+    _getEmail(){
+        
+    }
+    _getPassword(){
+        
+    }
     componentWillMount() {
         if (React.Platform.OS === 'android') {
-            React.BackAndroid.addEventListener('hardwareBackPress', ()=>this._pressButton());
+            React.BackAndroid.addEventListener('hardwareBackPress', () => this._pressButton());
         }
     }
 
     componentWillUnmount() {
         if (React.Platform.OS === 'android') {
-            React.BackAndroid.removeEventListener('hardwareBackPress', ()=>this._pressButton());
+            React.BackAndroid.removeEventListener('hardwareBackPress', () => this._pressButton());
         }
     }
 
@@ -54,16 +79,45 @@ export default class Resume extends Component {
                     <Text>{this.props.title} 等待添加</Text>
                 </View>
             </View>
+            <View style={{ flex: 1 }}>
+                <View style={styles.caption_wrapper}>
+                    <TouchableOpacity onPress={() => this._pressButton() }>
+                        <Image source={require('../../images/icon_back.png') } style={styles.back_img}/>
+                    </TouchableOpacity>
+                    
+                        <View style={styles.container}>
+                            <View>
+                                <Image source={require('../../images/avatar.png') } style={styles.avatar}/>
+                            </View>
+                            <View style={styles.inputRow}>
+                                <Text>邮箱</Text><TextInput style={styles.input} placeholder="请输入邮箱" onChangeText={this._getEmail}/>
+                            </View>
+                            <View style={styles.inputRow}>
+                                <Text>密码</Text><TextInput style={styles.input} placeholder="请输入密码" password={true} onChangeText={this._getPassword}/>
+                            </View>
+                            <View>
+                                <TouchableHighlight underlayColor="#fff" style={styles.btn} onPress={this._login}>
+                                    <Text style={{ color: '#fff' }}>登录</Text>
+                                </TouchableHighlight>
+                            </View>
+                        </View>
+                </View>
+            </View>
         );
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF'
+    },
+    avatar: {
+        marginTop:40,
+        width: 96,
+        height: 96,
+        borderRadius: 48
     },
     caption_wrapper: {
         padding: 10,
@@ -81,5 +135,29 @@ const styles = StyleSheet.create({
     back_img: {
         width: 30,
         height: 30
+    },
+    inputRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 10,
+    },
+    input: {
+        marginLeft: 10,
+        width: 220,
+        borderWidth: Util.pixel,
+        height: 35,
+        paddingLeft: 8,
+        borderRadius: 5,
+        borderColor: '#ccc'
+    },
+    btn: {
+        marginTop: 10,
+        width: 80,
+        height: 35,
+        backgroundColor: '#3BC1FF',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
     }
 });
