@@ -29,19 +29,19 @@ export default class Resume extends Component {
                 opacity: 1
             },
         };
-        
+
     }
-    _login(){
-        
+    _login() {
+
     }
-    _reg(){
-        
+    _reg() {
+
     }
-    _getEmail(){
-        
+    _getEmail() {
+
     }
-    _getPassword(){
-        
+    _getPassword() {
+
     }
     componentWillMount() {
         if (React.Platform.OS === 'android') {
@@ -68,17 +68,22 @@ export default class Resume extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <View style={styles.caption_wrapper}>
-                    <TouchableOpacity onPress={() => this._pressButton()}>
-                        <Image source={require('../../images/icon_back.png')} style={styles.back_img}/>
+                    <TouchableOpacity onPress={() => this._pressButton() }>
+                        <Image source={require('../../images/icon_back.png') } style={styles.back_img}/>
                     </TouchableOpacity>
                     <Text style={styles.caption_text}>{this.props.title}</Text>
                 </View>
-                <View style={{padding:15}}>
+                <View style={{ padding: 15 }}>
                     <Text>{this.props.title} 等待添加</Text>
                 </View>
             </View>
+        );
+    }
+}
+/*
+
             <View style={{ flex: 1 }}>
                 <View style={styles.caption_wrapper}>
                     <TouchableOpacity onPress={() => this._pressButton() }>
@@ -103,9 +108,8 @@ export default class Resume extends Component {
                         </View>
                 </View>
             </View>
-        );
-    }
-}
+*/
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -114,7 +118,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF'
     },
     avatar: {
-        marginTop:40,
+        marginTop: 40,
         width: 96,
         height: 96,
         borderRadius: 48
