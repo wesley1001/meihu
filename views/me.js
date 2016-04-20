@@ -55,7 +55,24 @@ export default class Me extends Component {
 
     render() {
         let UNDERLAY_COLOR = '#E8E8E8';
+        let resultList =
+            <ListView
+                dataSource={this.state.listSource}
+                renderRow={this._renderRow}
+                style={styles.listView}>
+            </ListView>;
+
+        <ScrollView style={styles.container}>
+                <ViewPager
+                    style={{height:130}}
+                    renderPage={this._renderPage}
+                    isLoop={true}
+                    autoPlay={true}
+                    dataSource={this.state.pagerSource}/>
+                {resultList}
+            </ScrollView>
         return (
+            
             <ScrollView style={styles.container}>
                 <View style={{ height: 225 }}>
                     <Image source={require('../images/avatar_bg.png') }
