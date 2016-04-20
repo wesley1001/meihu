@@ -126,15 +126,12 @@ export default class FramePage extends Component {
 
     componentDidMount() {
         //var path = Service.host + Service.getMessage;
-        /*
-        var path = Service.host + Service.getMessage;
-        var that = this;
+        var path = Service.host + Service.getMakeup;
         Util.post(path, {
             key: Util.key
         }, function (data) {
             console.log(data);
         });
-        */
         /*
         var that = this;
         

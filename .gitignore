@@ -35,3 +35,6 @@ npm-debug.log
 
 # server node_modules
 server/node_modules/
+
+# vscode
+.vscode
