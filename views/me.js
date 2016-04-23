@@ -17,6 +17,16 @@ import React, {
 } from 'react-native';
 
 import ViewPager from 'react-native-viewpager';
+import DiscoverCell  from './discover/discover-cell';
+import DiscoverDetail from './discover/discover-detail';
+import DiscoverData from './discover/discover-data';
+
+let BANNER_IMGS = [
+    require('../images/job1.jpg'),
+    require('../images/job2.jpg'),
+    require('../images/job3.jpg'),
+    require('../images/job4.jpg')
+];
 import Resume from './me/resume';
 import Util from './util.js'
 export default class Me extends Component {
