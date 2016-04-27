@@ -14,6 +14,7 @@ import React, {
     TouchableOpacity,
     TouchableHighlight,
 } from 'react-native';
+import ViewPager from 'react-native-viewpager';
 import Util from '../util.js'
 export default class Resume extends Component {
     constructor(props) {
@@ -68,7 +69,7 @@ export default class Resume extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
+            <ScrollView style={{ flex: 1 }}>
                 <View style={styles.caption_wrapper}>
                     <TouchableOpacity onPress={() => this._pressButton() }>
                         <Image source={require('../../images/icon_back.png') } style={styles.back_img}/>
@@ -88,7 +89,7 @@ export default class Resume extends Component {
                     </TouchableHighlight>
                 </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

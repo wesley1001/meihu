@@ -7,6 +7,7 @@ import React, {
     Component,
     Platform,
     View,
+    ListView,
     Text,
     StyleSheet,
     ScrollView,
@@ -15,12 +16,27 @@ import React, {
     TextInput,
 } from 'react-native';
 
+import ViewPager from 'react-native-viewpager';
+import DiscoverCell  from './discover/discover-cell';
+import DiscoverDetail from './discover/discover-detail';
+import DiscoverData from './discover/discover-data';
+
+let BANNER_IMGS = [
+    require('../images/job1.jpg'),
+    require('../images/job2.jpg'),
+    require('../images/job3.jpg'),
+    require('../images/job4.jpg')
+];
 import Resume from './me/resume';
 import Util from './util.js'
 export default class Me extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            listSource: new ListView.DataSource({rowHasChanged: (r1, r2)=>r1 !== r2})
+                .cloneWithRows(this._genRows({})),
+            pagerSource: new ViewPager.DataSource({pageHasChanged: (p1, p2)=>p1 !== p2})
+                .cloneWithPages(BANNER_IMGS),
             showLogin: {
                 flex: 1,
                 opacity: 1
@@ -28,17 +44,42 @@ export default class Me extends Component {
 
         };
     }
-    _login(){
-        
+    _login() {
+
     }
-    _reg(){
-        
+    _reg() {
+
     }
-    _getEmail(){
-        
+    _getEmail() {
+
     }
-    _getPassword(){
-        
+    _getPassword() {
+
+    }
+    
+    _selectDiscover(discover) {
+        const {navigator} = this.props;
+        if (navigator) {
+            navigator.push({
+                title: discover.title,
+                component: DiscoverDetail,
+                passProps: {discover}
+            });
+        }
+    }
+
+    _renderRow(discoverData) {
+        return (
+            <DiscoverCell onSelect={() => this._selectDiscover(discoverData)} discoverData={discoverData}/>
+        );
+    }
+
+    _genRows():Array<string> {
+        return DiscoverData;
+    }
+
+    _renderPage(data){
+        return(<Image source={data} style={styles.page} />)
     }
     _pressButton(title) {
         const {navigator} = this.props;
@@ -55,14 +96,31 @@ export default class Me extends Component {
 
     render() {
         let UNDERLAY_COLOR = '#E8E8E8';
+        let resultList =
+            <ListView
+                dataSource={this.state.listSource}
+                renderRow={this._renderRow}
+                style={styles.listView}>
+            </ListView>;
+
+        <ScrollView style={styles.container}>
+            <ViewPager
+                style={{ height: 130 }}
+                renderPage={this._renderPage}
+                isLoop={true}
+                autoPlay={true}
+                dataSource={this.state.pagerSource}/>
+            {resultList}
+        </ScrollView>
         return (
+
             <ScrollView style={styles.container}>
                 <View style={{ height: 225 }}>
                     <Image source={require('../images/avatar_bg.png') }
                         style={styles.backgroundImage}>
                         <Image source={require('../images/avatar.png') } style={styles.avatar}/>
                         <Text style={styles.name}>关爱每一天</Text>
-                        <View style={{flexDirection:'row'}}>
+                        <View style={{ flexDirection: 'row' }}>
                             <TouchableHighlight underlayColor="#fff" style={styles.btn} onPress={this._login}>
                                 <Text style={{ color: '#fff' }}>登录</Text>
                             </TouchableHighlight>
@@ -130,7 +188,7 @@ export default class Me extends Component {
 const styles = StyleSheet.create({
     container: {
         //top: Platform.OS === 'android' ? 0 : 20,
-        top:0,
+        top: 0,
         flex: 1,
         backgroundColor: '#EEE'
     },
@@ -148,7 +206,7 @@ const styles = StyleSheet.create({
         height: 30
     },
     avatar: {
-        marginTop:40,
+        marginTop: 40,
         width: 96,
         height: 96,
         borderRadius: 48
@@ -178,7 +236,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderColor: '#ccc'
     },
-    
+
     separator: {
         height: 1,
         backgroundColor: '#E8E8E8'

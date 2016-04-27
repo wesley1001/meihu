@@ -3,7 +3,7 @@
 ```
 npm install
 ```
-### 运行
+### 运行 编译ios时先把server排除在外
 ```
 react-native run-android
 
