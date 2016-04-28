@@ -103,6 +103,7 @@ export default class Me extends Component {
                 style={styles.listView}>
             </ListView>;
 
+        let fuckYou=
         <ScrollView style={styles.container}>
             <ViewPager
                 style={{ height: 130 }}
@@ -111,7 +112,7 @@ export default class Me extends Component {
                 autoPlay={true}
                 dataSource={this.state.pagerSource}/>
             {resultList}
-        </ScrollView>
+        </ScrollView>;
         return (
 
             <ScrollView style={styles.container}>
